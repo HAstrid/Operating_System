@@ -7,8 +7,7 @@
 
 int main(){
   int queue[20];
-  int head, max, q_size, temp, sum;
-  int dloc; //location of disk (head) arr
+  int head, max, q_size, temp, sum,vis[20],i,j,diff=0;
 
 
   printf("%s\t", "Input no of disk locations");
@@ -18,16 +17,13 @@ int main(){
   scanf("%d", &head);
 
   printf("%s\n", "Input elements into disk queue");
-  for(int i=0; i<q_size; i++){
+  for(i=0; i<q_size; i++){
     scanf("%d", &queue[i]);
+    vis[i]=0;
   }
-
-  queue[q_size] = head; //add RW head into queue
-  q_size++;
-
   //sort the array
-  for(int i=0; i<q_size;i++){
-    for(int j=i; j<q_size; j++){
+  for(i=0; i<q_size-1;i++){
+    for(j=i; j<q_size; j++){
       if(queue[i]>queue[j]){
         temp = queue[i];
         queue[i] = queue[j];
@@ -36,41 +32,36 @@ int main(){
     }
   }
 
-  max = queue[q_size-1];
+  max = head;
+  printf("\n%d",head);
 
   //locate head in the queue
-  for(int i=0; i<q_size; i++){
-    if(head == queue[i]){
-      dloc = i;
-      break;
+  for(i=0; i<q_size; i++){
+    if(max< queue[i]){
+      temp=abs(max-queue[i]);
+      diff+=temp;
+      printf("-->%d",queue[i]);
+      max=queue[i];
+      vis[i]=1;
+    }
+  }
+  diff+=abs(HIGH-max);
+  max=HIGH;
+
+  for(i=q_size-1;i>0;i--)
+  {
+    if(max>queue[i] && !vis[i])
+    {
+      temp=abs(max-queue[i]);
+      diff+=temp;
+      printf("-->%d",queue[i]);
+      max=queue[i];
+      vis[i]=1;
     }
   }
 
-  if(abs(head-LOW) <= abs(head-HIGH)){
-
-      for(int j=dloc; j>=0; j--){
-        printf("%d --> ",queue[j]);
-      }
-      for(int j=dloc+1; j<q_size; j++){
-        printf("%d --> ",queue[j]);
-      }
-
-      } else {
-
-      for(int j=dloc+1; j<q_size; j++){
-          printf("%d --> ",queue[j]);
-      }
-      for(int j=dloc; j>=0; j--){
-          printf("%d --> ",queue[j]);
-      }
-
-  }
-
-
-
-
-  sum  = head + max;
-  printf("\nmovement of total cylinders %d", sum);
+  printf("\nmovement of total cylinders %d\n", diff);
+  printf("Average seek time is %.3f \n",diff/(float)q_size);
 
   return 0;
 }
