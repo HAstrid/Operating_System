@@ -45,10 +45,12 @@ int main(){
       vis[i]=1;
     }
   }
+  printf("-->%d",HIGH);
+
   diff+=abs(HIGH-max);
   max=HIGH;
 
-  for(i=q_size-1;i>0;i--)
+  for(i=q_size-1;i>=0;i--)
   {
     if(max>queue[i] && !vis[i])
     {
