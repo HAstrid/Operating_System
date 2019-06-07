@@ -81,6 +81,7 @@ int fcfsMethod(){
     printf("\nAverage waiting time : %f",awt);
     printf("\n");
 }
+
 void main(){
     printf("Round Robin & FCFS scheduling algorithm \n");
     int ch;
