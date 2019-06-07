@@ -45,7 +45,7 @@ do
      set -- ` ls -l $fdate`
       if  [ -f "$fdate" ]
       then
-	ncal -h|grep $7|sed "s|$7|**|"
+	ncal -h|grep $7|sed "s| $7|**|"
       else
 	echo "Not possible"
       fi ;;
