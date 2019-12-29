@@ -3,7 +3,7 @@
 
 int num,bt[20],at[20],ct=0,wt[20],tat[20],rt[10];
 int i,temp=0,j,time,remain,flag=0,time_quantum;
-float awt=0,atat=0;
+ float awt=0,atat=0;
 float sumWT,sumTAT;
 
 void takeInput(){  // input taking
